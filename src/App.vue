@@ -1,5 +1,5 @@
 <template>
-  <p v-teste>Minha primeira diretiva customizada.</p>
+  <p v-texto>Minha primeira diretiva customizada.</p>
 </template>
 
 <script>
