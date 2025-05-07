@@ -31,4 +31,17 @@ Vue.directive('texto', {
     }
 })
 
+Vue.directive('posicao', {
+    created(el, binding){
+        console.log(el, binding.arg, binding.value)
+
+        const posicoesPossives = ['relative', 'fixed', 'absolute'];
+
+        if(posicoesPossives.includes(binding.arg)){
+            el.style.position = binding.arg
+            el.style.top = `${binding.value}px`
+        }
+    }
+})
+
 Vue.mount('#app') //Montando a aplicação
