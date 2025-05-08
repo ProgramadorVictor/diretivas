@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp} from 'vue'
 import App from './App.vue'
 
 // createApp(App).mount('#app')
@@ -6,6 +6,16 @@ import App from './App.vue'
 
 /* Criação de diretivas personalizadas */
 const Vue = createApp(App)
+
+//Ciclos de vidas ou Hooks
+// beforeCreate
+// created
+// beforeMount
+// mounted
+// beforeUpdate
+// updated
+// beforeUnmount
+// unmounted
 
 //Diretiva personalizada chamada teste.
 Vue.directive('texto', {
@@ -44,4 +54,41 @@ Vue.directive('posicao', {
     }
 })
 
+Vue.directive('informacao', {
+    created(el, binding){
+        console.log(el, binding, binding.modifiers, binding.value);
+        
+        let funcao = function(event){
+            console.log(event)
+
+            let informacaoSpan = document.createElement('span');
+            informacaoSpan.style.position = 'absolute'
+            informacaoSpan.style.background = '#ddd'
+            informacaoSpan.style.padding = '2px'
+            informacaoSpan.innerText = binding.value
+
+            el.appendChild(informacaoSpan);
+
+            informacaoSpan.addEventListener('click', (event) => {
+                event.stopPropagation() //Para não ficar gerando vários span
+                informacaoSpan.remove()
+            })
+        }
+
+        if(binding.modifiers['umClickMouse']){
+            el.addEventListener('click', funcao)
+        }
+
+        if(binding.modifiers['doisClickMouse']){
+            el.addEventListener('dblclick', funcao)
+        }
+    }
+})
+
 Vue.mount('#app') //Montando a aplicação
+
+/*
+    binding.value (valor atribuido a diretiva)
+    binding.arg (valor do argumento)
+    binding.modifiers (modificadores da diretiva)
+*/
