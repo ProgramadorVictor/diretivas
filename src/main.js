@@ -106,6 +106,12 @@ Vue.directive('informacao', {
                     event.stopPropagation() //Para não ficar gerando vários span
                     informacaoDivContainer.remove()
                 })
+
+                if(binding.modifiers['sairAutomaticamente']){
+                    setTimeout(() => {
+                        informacaoDivContainer.remove();
+                    }, 3000)
+                }
             }
         }
 
