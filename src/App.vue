@@ -6,10 +6,12 @@
   <span>Código A: <input type="text"><span v-informacao:simples.umClickMouse.sairAutomaticamente="'Você encontrará o código A na parte frontal do equipamento.'">i</span></span><br>
   <span>Código B: <input type="text"><span v-informacao:destacado.doisClickMouse.sairAutomaticamente="'Você encontrará o código B na parte trazeira do equipamento.'">i</span></span>
   <hr>
-  <h1 v-colorir-fundo-texto="'pink'">Diretiva customizada, registrada localmente no componente.</h1>
+  <h1 v-colorir-fundo-texto="'pink'" v-colorir-letra-texto="'white'">Diretiva customizada, registrada localmente no componente.</h1>
 </template>
 
 <script>
+import colorirLetraTexto from './directives/colorirLetraTexto'; //Importando diretivas para o registro local
+
 export default {
   name: 'App',
   directives: { //Criação de diretivas locais no próprio componente. Necessário criar o atributo 'directives'
@@ -20,7 +22,8 @@ export default {
         console.log('Diretiva customizada, registrada localmente no componente.', el, binding);
       },
       // updated: function(el, binding){}//Se necessário a utilização de outros hooks de life cycle.
-    }
+    },
+    colorirLetraTexto: colorirLetraTexto //Importando diretivas para o registro local
   },
   data: () => ({
     configuracaoInicial: {cor: 'red'}
