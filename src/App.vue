@@ -5,11 +5,23 @@
   <div v-posicao:absolute="75">Olá, eu sou um binding de argumento e valores</div>
   <span>Código A: <input type="text"><span v-informacao:simples.umClickMouse.sairAutomaticamente="'Você encontrará o código A na parte frontal do equipamento.'">i</span></span><br>
   <span>Código B: <input type="text"><span v-informacao:destacado.doisClickMouse.sairAutomaticamente="'Você encontrará o código B na parte trazeira do equipamento.'">i</span></span>
+  <hr>
+  <h1 v-colorir-fundo-texto="'pink'">Diretiva customizada, registrada localmente no componente.</h1>
 </template>
 
 <script>
 export default {
   name: 'App',
+  directives: { //Criação de diretivas locais no próprio componente. Necessário criar o atributo 'directives'
+    colorirFundoTexto:{ //O padrão camelCase é convertido para kebab-case, ao ser usado a diretiva diretamente na tag. linha 9 do código.
+      //colorirFundoTexto também pode ser usado dessa forma 'colorir-fundo-texto', juntamente com as ''
+      created: function(el, binding){
+        el.style.background = binding.value
+        console.log('Diretiva customizada, registrada localmente no componente.', el, binding);
+      },
+      // updated: function(el, binding){}//Se necessário a utilização de outros hooks de life cycle.
+    }
+  },
   data: () => ({
     configuracaoInicial: {cor: 'red'}
   })
